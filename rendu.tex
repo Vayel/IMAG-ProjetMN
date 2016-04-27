@@ -790,6 +790,13 @@ $$
 
 En effet :
 
+$$
+\begin{aligned}
+  \frac{\partial^2 w}{\partial x^2} + \frac{\partial^2 w}{\partial y^2} &=
+  \frac{\partial}{\partial x} (\frac{\partial w}{\partial r} \frac{\partial r}{\partial x} + \frac{\partial w}{\partial \theta} \frac{\partial \theta}{\partial x}) + \frac{\partial}{\partial y} (\frac{\partial w}{\partial r} \frac{\partial r}{\partial y} + \frac{\partial w}{\partial \theta} \frac{\partial \theta}{\partial y}) \\
+  &= \frac{\partial}{\partial x} (\frac{\partial w}{\partial r} \frac{x}{\sqrt{x^2 + y^2}} + \frac{\partial w}{\partial \theta} \frac{-y}{x^2 + y^2}) + \frac{\partial}{\partial y} (\frac{\partial w}{\partial r} \frac{y}{\sqrt{x^2 + y^2}} + \frac{\partial w}{\partial \theta} \frac{x}{x^2 + y^2})
+\end{aligned}
+$$
 
 Or :
 
@@ -829,6 +836,9 @@ Le but de cette partie est de discrétiser l'équation des ondes dans la base po
 	\right.
 \end{equation*}
 On note $d\tau$ le pas de temps et $w_{ij}^{n}$ la solution approchée $w(\eta_i,\theta_j,nd\tau)$. 
+
+%--- Question 9 ---%
+
 \begin{mdframed}[style=exampledefault]
 \question Montrer que si $i>1$ ($\eta \neq 0$) la discrétisation de l'équation des ondes \ref{eq:polarmodel} par un schéma explicite centré s'écrit:
 \footnotesize{
@@ -839,11 +849,18 @@ On note $d\tau$ le pas de temps et $w_{ij}^{n}$ la solution approchée $w(\eta_i
 }
 \end{mdframed}
 
+%--- Fin Question 9 ---%
+
+%--- Question 10 ---%
+
 \begin{mdframed}[style=exampledefault]
 \question
 Ecrire la discrétisation des conditions limites et des conditions initiales associées à l'équation (10).
 
 \end{mdframed}
+
+%--- Fin Question 10 ---%
+
 \begin{mdframed}[style=exampledefault]
 \question Montrer qu'une condition limite en $\eta=0$ peut s'écrire:
 \[
@@ -856,6 +873,7 @@ $$\frac{w_{1,1}^{n+1}-2w_{1,1}^{n}+w_{1,1}^{n-1}}{d\tau^{2}}=\frac{w_{2,1}^{n}-2
 $$\frac{w_{1,1}^{n+1}-2w_{1,1}^{n}+w_{1,1}^{n-1}}{d\tau^{2}}=\frac{w_{2,2}^{n}-2w_{1,1}^{n}+w_{2,6}^{n}}{d\eta^{2}}+ \frac{w_{2,4}^{n}-2w_{1,1}^{n}+w_{2,8}^{n}}{d\eta^{2}}
  $$}
  \end{mdframed}
+
 \begin{figure}[h]
 	\begin{center}
 		\caption{Condition limite en $\eta=0$ ($N_{\theta}=8$).}
@@ -870,6 +888,7 @@ Commencons par une étude de la stabilité du schéma explicite\ref{dispol}, pou
 W_{p_{i,j}}^{n}=e^{I(\alpha_1(id\eta)+\alpha_2(jd\theta)-\alpha_3 n d\tau)}
 \]
 où I est défini par:$I^2=-1$.
+
 %--- Question 11 ---%
 
 \begin{mdframed}[style=exampledefault]
