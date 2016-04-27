@@ -160,10 +160,11 @@
 % 							               EN-TETE        
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{\textbf{TP Méthodes Numériques \\ Modélisation d'une corde de guitare et du tympan \\ Rendu}}
+\title{\textbf{TP Méthodes Numériques \\ Modélisation d'une corde de guitare et du tympan}}
 \author{
 \begin{tabular}{cc}
-	\textsc{CARRE Ludovic} & \textsc{LEFOULON Vincent} \\
+	\textsc{Kévin Polisano} & \textsc{Meriem Jedouaa} \\
+	\small (kevin.polisano@imag.fr) & \small  (meriem.jedouaa@imag.fr)
 \end{tabular}}   
 \date{\small \today}
 
@@ -779,8 +780,6 @@ w(0,\theta,\tau)=w^0
 \]
 \end{mdframed}
 
-%--- Fin Question 8 ---%
-
 Le laplacien s'exprime en coordonnées polaires de la manière suivante :
 
 $$
@@ -791,8 +790,6 @@ $$
 
 En effet :
 
-TODO
-http://www.cafepedagogique.net/communautes/MarcCourbot/Documents/TRAVAUX%20SUR%20LE%20LAPLACIEN/2D%20-%20LAPLACIEN.pdf
 
 Or :
 
@@ -817,110 +814,86 @@ $$
 \end{aligned}
 $$
 
+%--- Fin Question 8 ---%
+
 \subsection{Discrétisation polaire de la surface 2D par un schéma explicite }
-Le but de cette partie est de discrétiser l'équation des ondes dans la base polaire (\ref{eq:polarmodel}) en utilisant un schéma explicite. Pour cela considérons dans un premier temps une discrétisation de $\Omega $ suivant une grille cartésienne $[0,N_x]\times [0,N_y]$ de pas uniforme $dx$, $dy$, formée par des points de coordonnées $(x_i,y_j)$ tel que :
+Le but de cette partie est de discrétiser l'équation des ondes dans la base polaire (\ref{eq:polarmodel}) en utilisant un schéma explicite. Pour cela on considère une discrétisation de $\Omega $ suivant une grille polaire $[1,N_\eta]\times [1,N_\theta]$ de pas uniforme $d\eta$, $d\theta$, formée par des points de coordonnées $(\eta_i,\theta_j)$ tel que :
 \begin{equation*}{}
 	\left\{
 	\begin{array}{rl}
-		x_i &=i dx,\quad 0\leq i \leq N_x \\
-		y_j &=j dy,\quad  0\leq j \leq N_y \\
- 		dx & =\frac{1}{N_x+1}\\
-		 dy &=\frac{1}{N_y+1}\\
+		\eta_i &=(i-1) d\eta,\quad 1\leq i \leq N_\eta \\
+		\theta_j &=(j-1) d \theta,\quad  1\leq j \leq N_\theta \\
+ 		d\eta& =\dfrac{1}{N_\eta-1}\\
+		 d\theta &=\dfrac{1}{N_{\theta}-1}\\
 	\end{array}
 	\right.
 \end{equation*}
-On note $dt$ le pas de temps et on approche la solution $w(x_i,y_j,ndt)$ par $w_{ij}^{n}$. Le laplacien est discrétisé  par un schéma centré d'ordre deux  et on utilise un schéma explicite d'ordre deux en temps. L'ordre de ces schémas peut être vérifié en utilisant un développement de Taylor. Le schéma explicite obtenue pour l'équation des ondes (\ref{eq:membranemodel}) est :
-
-\begin{equation}
-	\left\{
-	\begin{array}{rl}
-		\dfrac{w_{ij}^{n+1}-2w_{ij}^{n}+w_{ij}^{n-1}}{dt^{2}}=c^2\dfrac{w_{i+1,j}^{n}-2w_{i,j}^{n}+w_{i-1,j}^{n}}
-		{dx^{2}}+c^2\dfrac{w_{i,j+1}^{n}-2w_{i,j}^{n}+w_{i,j-1}^{n}}{dy^{2}}
-	\end{array}
-	\right.
-	\label{eq:diffcartesiennes}
+On note $d\tau$ le pas de temps et $w_{ij}^{n}$ la solution approchée $w(\eta_i,\theta_j,nd\tau)$. 
+\begin{mdframed}[style=exampledefault]
+\question Montrer que si $i>1$ ($\eta \neq 0$) la discrétisation de l'équation des ondes \ref{eq:polarmodel} par un schéma explicite centré s'écrit:
+\footnotesize{
+\begin{equation} 
+	\frac{w_{ij}^{n+1}-2w_{ij}^{n}+w_{ij}^{n-1}}{d\tau^{2}}=\frac{w_{i+1,j}^{n}-2w_{i,j}^{n}+w_{i-1,j}^{n}}{d\eta^{2}}+\frac{1}{(i d\eta)^2} \frac{w_{i,j+1}^{n}-2w_{i,j}^{n}+w_{i,j-1}^{n}}{d\theta^{2}}+\frac{1}{id\eta}\frac{w_{i+1,j}^{n}-w_{i-1,j}^{n}}{2d\eta}
+	\label{dispol}
 \end{equation}
-
-%--- Question 9 ---%
-
-\begin{mdframed}[style=exampledefault]
-\question En utilisant un développement de Taylor  et le  schéma explicite (\ref{eq:diffcartesiennes}) écrire les conditions initiales et les conditions limites de l'équation (\ref{eq:membranemodel}) obtenues pour $w_{i,j}^0,w_{i,j}^1$ sur la grille cartésienne.
+}
 \end{mdframed}
 
-%--- Fin Question 9 ---%
-
-%--- Question 10 ---%
-
 \begin{mdframed}[style=exampledefault]
-\question On note maintenant $w_{ij}^{n}=w(id\eta,jd\theta,nd\tau)$ les valeurs aux noeuds de la grille polaire représentée Figure \ref{fig:polaire}. Ecrire le schéma explicite de l'équation (\ref{eq:polarmodel}).
+\question
+Ecrire la discrétisation des conditions limites et des conditions initiales associées à l'équation (10).
+
 \end{mdframed}
-
-%--- Fin Question 10 ---%
-
-\begin{figure}
+\begin{mdframed}[style=exampledefault]
+\question Montrer qu'une condition limite en $\eta=0$ peut s'écrire:
+\[
+\dfrac{w_{1,1}^{n+1}-2 w_{1,1}^{n}+ w_{1,1}^{n-1}}{d\tau^2}=\dfrac{4}{d \eta^2}\left(\frac{1}{N_\theta} \sum_{j=1}^{N_\theta} w_{2,j}^n-w_{1,1}^{n}\right)
+\]
+\textit{Indication: Ecrire le schéma explicite de l'équation des ondes en coordonnées cartésiennes. Considérez le cas $N_\theta=8$ (voir figure \ref{fig:pol}  )
+et montrer que $w_{1,1}$ est solution des deux équations suivantes :
+$$\frac{w_{1,1}^{n+1}-2w_{1,1}^{n}+w_{1,1}^{n-1}}{d\tau^{2}}=\frac{w_{2,1}^{n}-2w_{1,1}^{n}+w_{2,5}^{n}}{d\eta^{2}}+ \frac{w_{2,3}^{n}-2w_{1,1}^{n}+w_{2,7}^{n}}{d\eta^{2}}
+ $$
+$$\frac{w_{1,1}^{n+1}-2w_{1,1}^{n}+w_{1,1}^{n-1}}{d\tau^{2}}=\frac{w_{2,2}^{n}-2w_{1,1}^{n}+w_{2,6}^{n}}{d\eta^{2}}+ \frac{w_{2,4}^{n}-2w_{1,1}^{n}+w_{2,8}^{n}}{d\eta^{2}}
+ $$}
+ \end{mdframed}
+\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{images/polaire.pdf}
-		\caption{Grille polaire}
-		\label{fig:polaire}
+		\caption{Condition limite en $\eta=0$ ($N_{\theta}=8$).}
+		\label{fig:pol}
 	\end{center}
 \end{figure}
-
-On montre qu'une condition limite en $\eta=0$ sur la grille polaire se détermine en utilisant le schéma explicite en coordonnées cartésiennes (\ref{eq:diffcartesiennes}), on obtient :
-\[
-\dfrac{w_0^{n+1}-2 w_0^{n}+ w_{0}^{n-1}}{d\tau^2}=\dfrac{4}{d \eta^2}\left(\frac{1}{N_\theta} \sum_{j=1}^{N_\theta} w_{1,j}^n-w_{0}^{n}\right)
-\]
-
 \subsection{Stabilité et précision du schéma}
 
 \subsubsection{Etude de la stabilité}
-Commencons par une étude de la stabilité du schéma explicite (10), pour cela on remplace $w_{i,j}^{n}$ dans l'équation discrétisée, par une solution décomposée en modes de fourier: 
+Commencons par une étude de la stabilité du schéma explicite\ref{dispol}, pour cela on remplace $w_{i,j}^{n}$ dans l'équation discrétisée, par une solution de la forme: 
 \[
-W_{p_{i,j}}^{n}=\phi^n e^{i\alpha_1(idx)}e^{i\alpha_2(jdy)}
+W_{p_{i,j}}^{n}=e^{I(\alpha_1(id\eta)+\alpha_2(jd\theta)-\alpha_3 n d\tau)}
 \]
-
+où I est défini par:$I^2=-1$.
 %--- Question 11 ---%
 
 \begin{mdframed}[style=exampledefault]
-\question Soit $J=\dfrac{\phi^{n+1}}{\phi^n}$ le coefficient d'amplification, montrer que $J$ vérifie l'équation du second degré suivante : 
-\[
-J^2+\gamma J+1=0
-\]
-avec 
-\[
-\gamma=-2+2c^2\dfrac{dt^2}{dx^2}(1-\cos(\alpha_1dx))+2c^2\dfrac{dt^2}{dy^2}(1-\cos(\alpha_2dy))
-\]
-En admettant que le schéma explicite (\ref{eq:membranemodel}) est stable sous la condition 
-\[
-\vert J \vert \leq 1
-\]
-en déduire que cette condition de stabilité s'écrit aussi :
-\[
-c^2\left(\dfrac{dt^2}{dx^2}+\dfrac{dt^2}{dy^2}\right)\leq 1
-\]
+\question  Montrer que si $\alpha_3\in \mathbb{R}$,  la condition de stabilité du schéma \ref{dispol} est donnée par:
+$$d \tau\leq \dfrac{ \eta d\eta d\theta}{\sqrt{(d \eta^2+(\eta d\theta})^{2})}$$
 \end{mdframed}
-
-%--- Fin Question 11 ---%
-
-Ainsi en posant $\displaystyle h=\dfrac{dxdy}{\sqrt{dx^2+dy^2}}$ on obtient la condition de courant : 
+Ainsi en prenant la plus petite valeur de $\eta$  on obtient la condition de courant : 
 \begin{equation}
-	\begin{array}{l}
-		CFL=c\dfrac{dt}{h} \leq 1~[\textrm{Cartésien}] \\ \\
-		\displaystyle CFL=\frac{d \tau}{d \eta d \theta}\leq 1~[\textrm{Polaire}]
-	\end{array}
+ CFL=\frac{d \tau}{d \eta d \theta}\leq 1
 	\label{eq:CFL}
 \end{equation}
 
 \subsubsection{Etude de la consistance}
-On souhaite étudier la précision du schéma explicite (\ref{eq:diffcartesiennes}) en coordonnées cartésiennes.
+On souhaite étudier la précision du schéma explicite (\ref{dispol}).
 
 %--- Question 12 ---%
 
 \begin{mdframed}[style=exampledefault]
-\question En développant $w_{i,j}^{n+1},w_{i,j}^{n},w_{i,j}^{n-1}$ par un développement de Taylor montrer que le schéma est d'ordre 2 en temps \textit{i.e} l'erreur de troncature est en $o(dt^2)$.\\
-En suivant le même principe avec les termes en espace $w_{i+1,j}^{n},w_{i-1,j}^{n},w_{i,j-1}^{n},w_{i,j}^{n},w_{i,j+1}^{n}$ montrer que l'erreur de troncature est en $o (dx^2,dy^2)$.\\
-Ecrire alors l'erreur de troncature $E_t$ du schéma et en déduire que le schéma est d'ordre deux en temps et en espace. Ainsi le schéma explicite (\ref{eq:diffcartesiennes}) est consistant 
+\question En développant $w_{i,j}^{n+1},w_{i,j}^{n},w_{i,j}^{n-1}$ par un développement de Taylor montrer que le schéma est d'ordre 2 en temps \textit{i.e} l'erreur de troncature est en $o(d\tau^2)$.\\
+En suivant le même principe avec les termes en espace $w_{i+1,j}^{n},w_{i-1,j}^{n},w_{i,j-1}^{n},w_{i,j}^{n},w_{i,j+1}^{n}$ montrer que l'erreur de troncature est en $o (d\eta^2,d\theta^2)$.\\
+Ecrire alors l'erreur de consistance $E_t$ du schéma et en déduire que le schéma est d'ordre deux en temps et en espace.
+Ainsi le schéma explicite \ref{dispol} est consistant:
 \[
-\lim_{(dt,dx,dy)\longrightarrow 0} E_t=0
+\lim_{(d\tau,d\eta,d\theta)\longrightarrow 0} E_t=0
 \]
 \end{mdframed}
 
@@ -1059,16 +1032,36 @@ Créez une animation représentant les vibrations de la membrane à différents 
 w_{ex}(\eta,\theta,\tau)=\cos(\lambda_{0,3} \tau)J_0(\lambda_{0,3}\eta)
 \]
 Comparer visuellement les deux solutions (analytique $w_{ex}$ et numérique $w_{num}$) en vérifiant qu'elles possèdent bien le même comportement.
-Tracez l'erreur relative en $\eta=0$ en fonction du temps pour   différentes valeurs de la CFL. 
+Tracez l'erreur relative en $\eta=0$  pour   différentes valeurs de la CFL. 
+Qu'observez-vous ?
+
+
+\end{mdframed}
+\begin{mdframed}[style=exampledefault]
+\question 
+On prend à présent la condition initiale suivante:
+\begin{equation*}
+	w(\eta,\theta,0)=J_0(\lambda_{0,1}\eta)+J_1(\lambda_{1,1}\eta)cos(\theta)
+\end{equation*}
+La solution exacte associée est:
+\begin{equation*}
+	w_{ex}(\eta,\theta,\tau)=J_0(\lambda_{0,1}\eta)cos(\lambda_{0,1}t)
+	+J_1(\lambda_{1,1}\eta)cos(\theta)cos(\lambda_{1,1}t)
+\end{equation*}
+Tracez l'erreur relative en $\eta=0$  pour différentes valeurs de la CFL.\\ 
 Qu'observez-vous ?
 \end{mdframed}
-
-%--- Fin Question 15 ---%
+\begin{mdframed}[style=exampledefault]
+\question
+En utilisant les résultats des questions 16 et 17, en déduire que l'instabilité du schéma provient  principalement de la discrétisation du terme en $\theta$.
+\end{mdframed}
+%- Fin Question 15 ---%
 
 %--- Question 16 ---%
 
 \begin{mdframed}[style=exampledefault]
-\question On fixe la CFL à 0.8. Tracez l'erreur relative globale $\|w_{ex}-w_{num}\|_{\infty}$ pour les grilles de taille ($N_\theta=80$, $N_\eta=40$), ($N_\theta=40$,$N_\eta=20$) et ($N_\theta=160$,$N_\eta=80$).\\
+\question On fixe la CFL à 0.8 et on prend la condition initiale \ref{eq:condinit}.\\
+ Tracez l'erreur relative globale $\|w_{ex}-w_{num}\|_{\infty}$ pour les grilles de taille ($N_\theta=80$, $N_\eta=40$), ($N_\theta=40$,$N_\eta=20$) et ($N_\theta=160$, $N_\eta=80$).\\
 Comparez l'erreur relative obtenue pour les trois différentes grilles et en déduire que le schéma est d'ordre deux en espace.
 \end{mdframed}
 
