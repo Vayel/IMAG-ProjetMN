@@ -849,6 +849,29 @@ On note $d\tau$ le pas de temps et $w_{ij}^{n}$ la solution approchée $w(\eta_i
 }
 \end{mdframed}
 
+$w$ est deux fois dérivable par rapport à chacun de ses paramètres. On peut donc
+lui appliquer un développement de Taylor :
+
+$$
+\left\{\begin{aligned}
+  w(\eta_{i+1}, \theta_j, \tau_n) &= w(\eta_i + d\eta, \theta_j, \tau_n) \\
+                                  &= w(\eta_i, \theta_j, \tau_n) + d\eta \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \frac{d\eta^2}{2} \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2) \\
+  w(\eta_{i-1}, \theta_j, \tau_n) &= w(\eta_i - d\eta, \theta_j, \tau_n) \\
+                                  &= w(\eta_i, \theta_j, \tau_n) - d\eta \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \frac{d\eta^2}{2} \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2)
+\end{aligned}\right.
+$$
+
+Donc :
+
+$$
+\left\{\begin{aligned}
+    \frac{w(\eta_{i+1}, \theta_j, \tau_n) - w(\eta_{i-1}, \theta_j, \tau_n)}{2d\eta} &= \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2) \\
+    \frac{w(\eta_{i+1}, \theta_j, \tau_n) - w(\eta_i, \theta_j, \tau_n) + w(\eta_{i-1}, \theta_j, \tau_n)}{d\eta^2} &= \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2)
+\end{aligned}\right.
+$$
+
+On a un résultat analogue pour les dérivées par rapport à $\theta$ et $\tau$, donc on en déduit l'équation discrétisée.
+
 %--- Fin Question 9 ---%
 
 %--- Question 10 ---%
