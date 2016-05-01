@@ -1,13 +1,12 @@
-// -------
-// Question 15
-// -------
-
 lambda01 = 2.40483
 lambda11 = 3.83171
 lambda03 = 8.65373
 
-// t = 0
-function z = init_positions()
+// -------
+// Question 15
+// -------
+
+function z = init_positions1()
   z = zeros(N_eta, N_theta + 1)
 
   for i = 1:N_eta
@@ -58,21 +57,13 @@ endfunction
 function plot_positions(z)
   eta = linspace(0, 1, N_eta)
   theta = linspace(0, 1, N_theta + 1)
-  plot3d(eta, theta, z)
+  plot3d1(eta, theta, z, flag=[2,0,4])
 endfunction
 
-function q15_animation()
+function num_animation(init_positions)
   cur = init_positions()
   prev = cur // Conditions aux limites sur la derivee
   plot_positions(cur)
-
-  N_tau = 100
-  d_tau = 0.01
-  N_theta = 80
-  d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
-  N_eta = 40
-  d_eta = 1 / N_eta
-  c = 1
 
   for t = 1:N_tau
     drawlater;
@@ -86,6 +77,18 @@ function q15_animation()
     prev = cur
     cur = nxt
   end
+endfunction
+
+function q15_animation()
+  N_tau = 100
+  d_tau = 0.01
+  N_theta = 80
+  d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
+  N_eta = 40
+  d_eta = 1 / N_eta
+  c = 1
+
+  num_animation(init_positions1)
 endfunction
 
 // -------
@@ -200,3 +203,29 @@ endfunction
 // -------
 // Question 19
 // -------
+
+// -------
+// Question 20
+// -------
+
+function z = init_positions2()
+  z = zeros(N_eta, N_theta + 1)
+
+  for i = 1:N_eta
+    for j = 1:N_theta
+      z(i,:) = besselj(1, lambda11 * i * d_eta) * cos(j * d_theta) / 2
+    end
+  end
+endfunction
+
+function q20_animation()
+  N_tau = 200
+  d_tau = 0.01
+  N_theta = 80
+  d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
+  N_eta = 40
+  d_eta = 1 / N_eta
+  c = 1
+
+  num_animation(init_positions2)
+endfunction
