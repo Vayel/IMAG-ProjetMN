@@ -171,3 +171,32 @@ function q16_relerror()
 
   relerror(get_positions_ex)
 endfunction
+
+// -------
+// Question 17
+// -------
+
+function z = get_positions_ex2(n)
+  z = zeros(N_eta, N_theta + 1)
+
+  for i = 1:N_eta
+    for j = 1:N_theta
+      z(i, j) = cos(lambda01 * n * d_tau) * besselj(0, lambda01 * i * d_eta)
+      z(i, j) = z(i, j) + cos(lambda11 * n * d_tau) * cos(j * d_theta) * besselj(1, lambda11 * i * d_eta)
+    end
+  end
+endfunction
+
+function q17_relerror()
+  N_tau = 100
+  N_theta = 80
+  d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
+  N_eta = 40
+  d_eta = 1 / N_eta
+
+  relerror(get_positions_ex2)
+endfunction
+
+// -------
+// Question 19
+// -------
