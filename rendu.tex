@@ -113,7 +113,19 @@ On a un résultat analogue pour les dérivées par rapport à $\theta$ et $\tau$, do
 
 \section*{Question 11}
 
+En coordonnées cartésiennes, le schéma explicite est :
 
+$$
+\rho \frac{w_{k, l}^{m+1} - 2w_{k, l}^m + w_{k, l}^{m-1}}{dt^2} =
+T \times (\frac{w_{k+1, l}^m - 2w_{k, l}^m + w_{k-1, l}^m}{dx^2} + \frac{w_{k, l+1}^m - 2w_{k, l}^m + w_{k, l-1}^m}{dy^2})
+$$
+
+On l'étudie en $(k, l) = (1, 1)$ pour avoir $\eta = 0$ :
+
+$$
+\rho \frac{w_{1, 1}^{m+1} - 2w_{1, 1}^m + w_{1, 1}^{m-1}}{dt^2} =
+T \times (\frac{w_{2, 1}^m - 2w_{1, 1}^m + w_{0, 1}^m}{dx^2} + \frac{w_{1, 2}^m - 2w_{1, 1}^m + w_{1, 0}^m}{dy^2})
+$$
 
 \section*{Question 12}
 
@@ -125,7 +137,46 @@ On a un résultat analogue pour les dérivées par rapport à $\theta$ et $\tau$, do
 
 \section*{Question 14}
 
+$$
+\begin{aligned}
+(10) &\Leftrightarrow \left\{\begin{aligned}
+       &-\omega^2 F(\eta, \theta) cos(\omega \tau) = \frac{\partial^2 F}{\partial \eta^2} cos(\omega \tau) +
+                                                     \frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} cos(\omega \tau) +
+                                                     \frac{1}{\eta} \frac{\partial F}{\partial \theta} cos(\omega \tau) \\
+       &F(1, \theta) cos(\omega \tau) = 0 \\
+       &F(\eta, \theta) = w_0(\eta cos(\theta), \eta sin(\theta)) \\
+     \end{aligned}\right. \\
+     &\Leftrightarrow \left\{\begin{aligned}
+       &cos(\omega \tau) [\omega^2 F(\eta, \theta) + 
+       \frac{\partial^2 F}{\partial \eta^2} +
+       \frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} +
+       \frac{1}{\eta} \frac{\partial F}{\partial \theta}] = 0 \\
+       &F(1, \theta) cos(\omega \tau) = 0 \\
+       &F(\eta, \theta) = w_0(\eta cox(\theta), \eta sin(\theta)) \\
+     \end{aligned}\right.
+\end{aligned}
+$$
 
+Comme la première équation est valable pour tout $\tau$, on obtient :
+
+$$
+\omega^2 F(\eta, \theta) + 
+\frac{\partial^2 F}{\partial \eta^2} +
+\frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} +
+\frac{1}{\eta} \frac{\partial F}{\partial \theta} = 0
+$$
+
+Supposons que les $F_n$ définis dans l'énoncé vérifie l'équation suivante :
+
+$$
+\frac{1}{\omega^2} \frac{d^2F_n}{d\eta^2} + \frac{1}{\omega \eta} \frac{1}{\omega} \frac{dF_n}{d\eta} + F_n - \frac{n^2}{\omega^2 \eta^2} F_n = 0
+$$
+
+\textit{i.e.}
+
+$$
+\frac{d^2F_n}{d\eta^2} + \frac{1}{\eta} \frac{dF_n}{d\eta} + \omega^2 F_n - \frac{n^2}{\eta^2} F_n = 0
+$$
 
 \section*{Question 15}
 
