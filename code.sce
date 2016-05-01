@@ -2,22 +2,16 @@
 // Question 15
 // -------
 
-N_theta = 80
-d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
-N_eta = 40
-d_eta = 1 / N_eta
-CFL = 0.5
-N_tau = 100
-// d_tau = CFL * d_eta * d_theta
-d_tau = 0.01
-c = 1
+lambda01 = 2.40483
+lambda11 = 3.83171
+lambda03 = 8.65373
 
 // t = 0
 function z = init_positions()
   z = zeros(N_eta, N_theta + 1)
 
   for i = 1:N_eta
-    z(i,:) = z(i,:) + besselj(0, 8.65373 * i * d_eta)
+    z(i,:) = z(i,:) + besselj(0, lambda03 * i * d_eta)
   end
 endfunction
 
@@ -67,17 +61,29 @@ function plot_positions(z)
   plot3d(eta, theta, z)
 endfunction
 
-cur = init_positions()
-prev = cur // Conditions aux limites sur la derivee
-plot_positions(cur)
+function q15_animation()
+  cur = init_positions()
+  prev = cur // Conditions aux limites sur la derivee
+  plot_positions(cur)
 
-// Animation
-for t = 1:N_tau
-  drawlater;
-  nxt = next_positions(cur, prev)
-  clf();
-  plot_positions(nxt)
-  drawnow;
-  prev = cur
-  cur = nxt
-end
+  N_tau = 100
+  d_tau = 0.01
+  N_theta = 80
+  d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
+  N_eta = 40
+  d_eta = 1 / N_eta
+  c = 1
+
+  for t = 1:N_tau
+    drawlater;
+    nxt = next_positions(cur, prev)
+    clf();
+    ax = gca()
+    ax.data_bounds = [0, 0, -1 ; 1, 1, 1]
+    xtitle('Numérique', 'eta', 'theta', 'w')
+    plot_positions(nxt)
+    drawnow;
+    prev = cur
+    cur = nxt
+  end
+endfunction
