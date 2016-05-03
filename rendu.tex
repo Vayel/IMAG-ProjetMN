@@ -8,11 +8,18 @@
 \usepackage{amsbsy}
 \usepackage{amsopn}
 \usepackage{fancyhdr}
+\usepackage{amsmath,amssymb}
 
 \newcommand{\noi}{\noindent}
 \newcommand{\dsp}{\displaystyle}
 \newcommand{\ind}{{{\large 1} \hspace*{-1.6mm} {\large 1}}}
-
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\ub}{\mathbf{u}}
 
 \textheight 25cm
 \textwidth 16cm
@@ -25,6 +32,332 @@
 \pagestyle{plain}
 
 \begin{document}
+
+\section*{Question 1}
+
+\[
+	\frac{\partial ^2u}{\partial t^2}=\gamma ^2\frac{\partial ^2u}{\partial x^2}
+\]
+On a,
+\[
+    \frac{\partial ^2U(x)\cos(\omega t)}{\partial t^2}-\gamma^2\frac{\partial ^2U(x)\cos(\omega t)}{\partial x^2}=0
+\]
+\[
+    U''(x)-\beta ^2U(x)=0,\quad\quad avec \beta ^2=\frac{\omega ^2}{\gamma ^2}
+\]
+Ce qui nous donne l'équation différentielle suivante:
+\[
+    U(x)=\lambda\cos(\beta x)+\mu\sin(\beta x),\quad \lambda,\mu \in \Re
+\]
+Par les conditions aux limites:
+\[
+    u(0,t)=u(L,t)=0
+\]
+\[
+    U(0)=\lambda \cos(0)+\mu \sin(0)=\lambda+0 \quad \Longrightarrow \quad \lambda=0
+\]
+Donc: 
+\[
+    U(x)=\mu\sin(\beta x)
+\]
+Or,
+\[
+    U(L)=\mu\sin(\beta L)=0 \quad \Longrightarrow \quad \beta=\frac{n\pi}{L}
+\]
+On obtient bien:
+\[
+    U_n(x)=B_n\sin\left(n\pi \frac{x}{L}\right),\quad \omega_n=n\pi \frac{\gamma}{L}\Leftrightarrow f_n=n\frac{1}{2L}\sqrt{\frac{T}{\mu}}
+\]
+Lorsque la longueur de la corde augmente, la fréquence fondamentale diminue. Lorsque la longueur est divisé par 2 on a $f_{n}=n\sqrt{\frac{T}{\mu}}$ et donc pour la fréquence fondamentale $f_{1}=\sqrt{\frac{T}{\mu}}$.
+Lorsque la masse linéique aumente, la fréquence fondamentale diminue et lorsque la tension augment la fréquence fondamentale augmente également.
+
+\section*{Question 2}
+
+    A)
+On a,
+\[
+    u(x+h,t)+u(x-h,t)=2u(x,t)+h^2\frac{\partial^2 u}{\partial x^2}(x,t)+o(h^2)
+\]
+\[
+    u(x,t+k)+u(x,t-k)=2u(x,t)+k^2\frac{\partial^2 u}{\partial t^2}(x,t)+o(k^2)
+\]
+Ce qui nous donne:
+\[
+    -h^2\frac{\partial^2 u}{\partial x^2}(x,t)=2u(x,t)-u(x+h,t)-u(x-h,t)+o(h^2)
+\]
+\[
+    -k^2\frac{\partial^2 u}{\partial t^2}(x,t)=2u(x,t)-u(x,t+k)-u(x,t-k)+o(k^2)
+\]
+Donc,
+\[
+    \frac{\partial^2 u}{\partial x^2}(x,t)=\frac{2u(x,t)-u(x+h,t)-u(x-h,t)}{h^2}+o(1)
+\]
+\[
+    \frac{\partial^2 u}{\partial t^2}(x,t)=\frac{2u(x,t)-u(x,t+k)-u(x,t-k)}{k^2}+o(1)
+\]
+Par changement de notation on a bien:
+\[
+\begin{array}{l}
+	\displaystyle \frac{\partial^2 u}{\partial x^2}(x_l,t_k)\approx \frac{1}{h^2}(u_{l+1}^n-2u_l^n+u_{l-1}^n)\\ \\ 		\displaystyle \frac{\partial^2 u}{\partial t^2}(x_l,t_k)\approx \frac{1}{k^2}(u_{l}^{n+1}-2u_l^n+u_{l}^{n-1})\end{array}
+\]
+    B)
+\[
+    u(x+2h,t)+u(x-2h,t)=2u(x,t)+4h^2\frac{\partial ^2u}{\partial x^2}(x,t)+\frac{4}{3}h^4\frac{\partial ^4u}{\partial x^4}(x,t)+o(h^4)
+\]
+\[
+    -4[u(x+h,t)+u(x-h,t)]=-8u(x,t)-4h^2\frac{\partial ^2u}{\partial x^2}(x,t)-\frac{h^3}{3}\frac{\partial ^4u}{\partial x^4}(x,t)-o(h^4)
+\]
+Donc,
+\[
+    u(x+2h,t)+u(x-2h,t)-4[u(x+h,t)+u(x-h,t)]+6u(x,t)=h^4\frac{\partial ^4u}{\partial x^4}(x,t)
+\]
+Par simple changement de notation on a bien,
+\[
+\frac{\partial^4 u}{\partial x^4}(x_l,t_k)\approx \frac{1}{h^4}(u_{l+2}^n-4u_{l+1}^n+6u_l^n-4u_{l-1}^n+u_{l-2}^n)
+\]
+    C) On a
+\[
+    \frac{\partial u}{\partial t}(x+h,t)=\frac{u(x+h,t+k)-u(x+h,t-k)}{2k}+o(1)\approx \frac{u_{l+1}^{n+1}-u_{l+1}^{n-1}}{2k}
+\]
+\[
+    \frac{\partial u}{\partial t}(x-h,t)=\frac{u(x-h,t+k)-u(x-h,t-k)}{2k}+o(1)\approx \frac{u_{l-1}^{n+1}-u_{l-1}^{n-1}}{2k}
+\]
+\[
+    \frac{\partial 2u}{\partial t}(x,t)=\frac{2u(x,t+k)-2u(x,t-k)}{2k}+o(1) \approx \frac{2u_{l}^{n+1}-2u_{l}^{n-1}}{2k}
+\]
+D'où,
+\[
+\frac{\partial}{\partial t}\left(\frac{\partial^2 u}{\partial x^2}\right)\approx \frac{1}{2kh^2}(u_{l+1}^{n+1}-2u_{l}^{n+1}+u_{l-1}^{n+1}-u_{l+1}^{n-1}+2u_l^{n-1}-u_{l-1}^{n-1})
+\]
+    D) On réécris l'équation
+\[
+    \frac{\partial^2 u}{\partial t^2}-\gamma^2 \frac{\partial^2 u}{\partial x^2}+\kappa^2 \frac{\partial^4 u}{\partial x^4}+2\sigma_0 \frac{\partial u}{\partial t}-2\sigma_1 \frac{\partial^3 u}{\partial t\partial x^2}=0
+\]
+En développant les termes, on obtient:
+\[
+    -\frac{\sigma_{1}}{kh^2}u_{l-1}^{n+1}+(\frac{1}{k^2}+\frac{\sigma_{0}}{k}+\frac{2\sigma_{1}}{kh^2})u_l^{n+1}-\frac{\sigma_{1}}{kh^2}u_{l+1}^{n+1}
+\]
+\[
+    +\quad\frac{\kappa^2}{h^4}u_{l-2}^n+(-\frac{\gamma ^2}{h^2}-\frac{4\kappa ^2}{h^4})u_{l-1}^n+(-\frac{2}{k^2}+\frac{2\gamma^2}{h^2}+\frac{6\kappa^2}{h^4})u_l^n+(-\frac{\gamma ^2}{h^2}-\frac{4\kappa ^2}{h^4})u_{l+1}^n+\frac{\kappa^2}{h^4}u_{l+2}^n
+\]
+\[
+    +\quad\frac{\sigma_{1}}{kh^2}u_{l-1}^{n-1}+(\frac{1}{k^2}-\frac{\sigma_{0}}{k}-\frac{2\sigma_{1}}{kh^2})u_l^{n-1}+\frac{\sigma_{1}}{kh^2}u_{l+1}^{n-1}
+\]
+\[
+    =0
+\]
+En multipliant l'équation par $k^2$ puis en remplacant les coefficients, on obtient le schéma implicite associé à l'EDP.
+
+\section*{Question 3}
+
+En considérant:
+\[
+    u(0,t)=\frac{\partial ^2u}{\partial x^2}(0,t)=\frac{1}{h^2}(u_{1}-2u_{0}+u_{-1})=0
+\]
+\[
+    u(L,t)=\frac{\partial ^2u}{\partial x^2}(L,t)=\frac{1}{h^2}(u_{N+1}-2u_{N}+u_{N-1})=0
+\]
+On obtient que,
+\[
+    u_{1}=-u_{-1}+2u_{0}, \quad Or \quad u_{0}=0
+\]
+\[
+    u_{N+1}=-u_{N-1}+2u_{N}, \quad Or \quad u_{N}=0
+\]
+D'où,
+\[
+    u_{1}=-u_{-1} \quad\quad\quad u_{N+1}=-u_{N-1}
+\]
+
+Si l'on considère i $\in$ [1;N], on a
+\[
+    \overline{\A}\overline{\ub}^{n+1}: a_{1}u_{i-1}^{n+1}+a_{2}u_{i}^{n+1}+a_{1}u_{i+1}^{n+1}
+\]
+\[
+   \overline{\C}\overline{\ub}^{n-1}: c_{1}u_{i-1}^{n+1}+c_{2}u_{i}^{n+1}+c_{1}u_{i+1}^{n+1}
+\]
+Avec i $\in$ [2;N-1], on a 
+\[
+    \overline{\B}\overline{\ub}^n: b_{1}u_{i-2}^n+b_{2}u_{i-1}^n+b_{3}u_{i}^n+b_{2}u_{i+1}^n+b_{1}u_{i+2}^n
+\]
+Puis si $i=1$,
+\[
+    \overline{\B}\overline{\ub}^n: b_{2}u_{0}^n+b_{3}u_{1}^n-b_{1}u_{1}^n+b_{2}u_{2}^n+b_{1}u_{3}^n
+\]
+\[
+    = b_{2}u_{0}^n+b_{3}u_{1}^n+b_{1}u_{-1}^n+b_{2}u_{2}^n+b_{1}u_{3}^n
+\]
+\[
+    car -b_{1}u_{1}^n=b_{1}u_{-1}
+\]
+Et si $i=N$,
+\[
+    \overline{\B}\overline{\ub}^n: b_{1}u_{N-3}^n+b_{2}u_{N-2}^n-b_{1}u_{N-1}^n+b_{3}u_{N-1}^n+b_{2}u_{N}^n
+\]
+\[
+    = b_{1}u_{N-3}^n+b_{2}u_{N-2}^n+b_{3}u_{N-1}^n+b_{2}u_{N}^n+b_{1}u_{N+1}^n
+\]
+\[
+    car -b_{1}u_{N-1}^n=b_{1}u_{N+1}
+\]
+Enfin, pour $i=0$
+\[
+	\overline{\A} \overline{\ub}^{n+1}+\overline{\B} \overline{\ub}^n+\overline{\C} \overline{\ub}^{n-1}: u_{0}^{n+1}+u_{0}^{n}+u_{n-1}^{n-1}=0
+\]
+$i=N+1$
+\[
+	\overline{\A} \overline{\ub}^{n+1}+\overline{\B} \overline{\ub}^n+\overline{\C} \overline{\ub}^{n-1}: u_{N}^{n+1}+u_{N}^{n}+u_{N}^{n-1}=0
+\]
+La forme matricielle proposée permet donc de caractériser le shéma numérique.
+
+\section*{Question 4}
+
+    $\A=(1+\sigma_0 k)\mathbf{I}-\sigma_1 k \D_{xx}$
+\[
+    a_{i,i-1}=-\frac{\sigma_{1} k}{h^2}=a_{1}
+\]
+\[
+    a_{i,i}=1+\sigma_{0}k+\frac{2\sigma_{1}k}{h^2}=a_{2}
+\]
+\[
+    a_{i,i+1}=-\frac{\sigma_{1} k}{h^2}=a_{1}
+\]
+    $\C=(1-\sigma_0 k)\mathbf{I}+\sigma_1 k \D_{xx}$
+\[
+    c_{i,i-1}=\frac{\sigma_{1} k}{h^2}=c_{1}
+\]
+\[
+    c_{i,i}=1-\sigma_{0}k-\frac{2\sigma_{1}k}{h^2}=c_{2}
+\]
+\[
+    c_{i,i+1}=\frac{\sigma_{1} k}{h^2}=c_{1}
+\]
+\[
+\D_{xxxx}=\frac{1}{h^4}
+\begin{bmatrix}
+    5 & -4 & 1 & & & \mathbf{0} \\
+    -4 & 6 & -4 & 1 & & & \\
+    1 & -4 & 6 & -4 & 1 & & \\ 
+    &\ddots&\ddots&\ddots&\ddots&\ddots\\
+    & & 1 & -4 & 6 & -4 \\
+    \mathbf{0} & & & 1 & -4 & 5
+\end{bmatrix}, 
+\]
+$\B=-2\mathbf{I}-\gamma^2 k^2 \D_{xx}+\kappa^2 k^2\D_{xxxx}$\\
+\\Pour $i \in [1;N-2]$,
+\[
+    b_{i,i}=-2+\frac{2\gamma ^2 k^2}{h^2}+\frac{6\kappa^2 K^2}{h^4}
+\]
+Et avec $i \in [0;N-1]$
+\[
+    b_{i,i-2}=\frac{\kappa^2 k^2}{h^4}
+\]
+\[
+    b_{i,i-1}=-\frac{\gamma^2 k^2}{h^2}-\frac{4\kappa^2 k^2}{h^4}
+\]
+\[
+    b_{i,i+1}=-\frac{\gamma^2 k^2}{h^2}-\frac{4\kappa^2 k^2}{h^4}
+\]
+\[
+    b_{i,i+2}=\frac{\kappa^2 k^2}{h^4}
+\]
+Enfin, pour $i=0$ et $i=N-1$
+\[
+    b_{i,i}=-2+\frac{2\gamma^2 k^2}{h^2}+\frac{5\kappa^2 k^2}{h^4}
+\]
+Or,
+\[
+    b_{3}-b_{1}=(-2+\frac{2\gamma ^2 k^2}{h^2}+\frac{6\kappa^2 K^2}{h^4})-\frac{\kappa^2 k^2}{h^4}=-2+\frac{2\gamma^2 k^2}{h^2}+\frac{5\kappa^2 k^2}{h^4}
+\]
+\Large{CQFD}\\
+
+\section*{Question 5}
+
+Par injection de $\tilde u(x,t)=e^{st+j\beta x}$
+\[
+    \frac{\partial ^2\tilde u}{\partial t^2}=s^2\tilde u \quad\quad \frac{\partial\tilde u}{\partial x^2}=-\beta^2 \tilde u
+\]
+\[
+    \frac{\partial\tilde u}{\partial x^4}=\beta^4 \tilde u \quad\quad \frac{\partial\tilde u}{\partial t}=s\tilde u
+\]
+\[
+    \frac{\partial^3 \tilde u}{\partial t\partial x^2}=-s\beta^2 \tilde u
+\]
+On a alors:
+\[
+    s^2=-\gamma^2 \beta^2 -\kappa^2 \beta^4 -2s\sigma_{0} -2s\beta^2 \sigma_{1}
+\]
+Ce qui nous donne l'équation de degré 2 suivante:
+\[
+    s^2 +2(\sigma_{0}+\beta^2 \sigma_{1})s +(\gamma^2\beta^2+\kappa^2\beta^4)=0
+\]
+Ainsi,
+\[
+    \Delta=4(\sigma_{0}+\beta^2\sigma_{1})^2-4(\gamma^2\beta^2+\kappa^2\beta^4)
+\]
+Or, puisque l'on a $\sigma_{0},\sigma_{1} \leqslant 0$ et petits, s possède deux racines complexes:
+\[
+    \frac{-2(\sigma_{0}+\beta^2 \sigma_{1})\pm2j\sqrt{\gamma^2 \beta^2+\kappa^2 \beta^4 -(\sigma_{0}+\beta^2 \sigma_{1})^2}}{2}
+\]
+\large{CQFD}\\\\
+B) On considère l'expression suivante
+\[
+    \omega^2=\gamma^2\beta^2+\kappa^2\beta^4-\sigma_{0}^2-\beta^4\sigma_{1}^2-2\beta^2\sigma_{0}\sigma_{1}
+\]
+Ce qui nous donne une expression de $\beta^2$
+\[
+    (\kappa^2-\sigma_{1})(\beta^2)^2+(\gamma^2-2\sigma_{0}\sigma_{1})\beta^2-(\omega^2+\sigma_{0}^2)=0
+\]
+\[
+    \Delta=(\gamma^2-2\sigma_{0}\sigma_{1})^2-4(\kappa^2-\sigma_{1})(-\omega^2-\sigma_{0}^2)
+\]
+$\beta^2$ admet donc deux racines réelles, on ne considère que la racine positive:
+\[
+\frac{-(\gamma^2-2\sigma_{0}\sigma_{1})+\sqrt{(\gamma^2-2\sigma_{0}\sigma_{1})^2+4(\omega^2+\sigma_{0}^2)(\kappa^2+\sigma_{1}^2)}}{2(\kappa^2-\sigma_{1}^2)}
+ \]
+ Et puisque $\sigma_{0}$ et $\sigma_{1}$ sont proches de 0, on obtient bien:
+ \[
+    \beta^2=\frac{-\gamma^2+\sqrt{\gamma^4+4\kappa^2 \omega^2}}{2\kappa^2}
+ \]
+ C) On considère,
+ \[
+     \sigma(\omega_{1})=-\sigma_{0}-\sigma_{1}\xi(\omega_{1})
+ \]
+ \[
+     \sigma(\omega_{2})=-\sigma_{0}-\sigma_{1}\xi(\omega_{2})
+ \]
+ Ainsi,
+ \[
+     \sigma(\omega_{1})-\sigma(\omega_{2})=\sigma_{1}(\xi(\omega_{2})-\xi(\omega_{1}))
+ \]
+ Et,
+ \[
+     -\frac{6\ln{10}}{T_{60}(\omega_{1})}+\frac{6\ln{10}}{T_{60}(\omega_{2})}=\sigma_{1}(\xi(\omega_{2})-\xi(\omega_{1}))
+ \]
+ D'où,
+ \[
+     \frac{6\ln{10}}{\xi(\omega_{2})-\xi(\omega{1})}(-\frac{1}{T_{60}(\omega_{1})}+\frac{1}{T_{60}(\omega_{2})})=\sigma_{1}
+ \]
+ On a maintenant
+ \[
+     \sigma(\omega_{1})=-\sigma_{0}-\frac{6\ln{10}}{\xi(\omega_{2})-\xi(\omega_{1})}(-\frac{\xi(\omega_{1})}{T_{60}(\omega_{1})}+\frac{\xi(\omega_{1})}{T_{60}(\omega_{2})})
+ \]
+ Et
+ \[
+     -\frac{6\ln{10}}{T_{60}(\omega_{1})}=\sigma(\omega_{1})=-\sigma_{0}-\frac{6\ln{10}}{\xi(\omega_{2})-\xi(\omega_{1})}(-\frac{\xi(\omega_{1})}{T_{60}(\omega_{1})}+\frac{\xi(\omega_{1})}{T_{60}(\omega_{2})})
+ \]
+ Donc
+ \[
+     \sigma_{0}=-\frac{6\ln{10}}{\xi(\omega_{2})-\xi(\omega_{1})}(-\frac{\xi(\omega_{1})}{T_{60}(\omega_{1})}+\frac{\xi(\omega_{1})}{T_{60}(\omega_{2})}-\frac{\xi(\omega_{2})-\xi(\omega_{1})}{T_{60}(\omega_{1})})
+ \]
+ Ce qui nous donne finalement,
+ \[
+    \sigma_0=\frac{6 \ln 10}{\xi(\omega_2)-\xi(\omega_1)}\left(\frac{\xi(\omega_2)}{T_{60}(\omega_1)}-\frac{\xi(\omega_1)}{T_{60}(\omega_2)}\right),
+ \]
+
+\section*{Question 7}
+
+
 
 \section*{Question 8}
 
