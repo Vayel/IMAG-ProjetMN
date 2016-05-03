@@ -224,6 +224,42 @@ endfunction
 // Question 19
 // -------
 
+function q19_relerror()
+  CFL = 0.8
+  N_tau = 100
+  grids = [80, 40 ; 40, 20 ; 160, 80]
+
+  errs = zeros(1, N_tau)
+
+  for i = 1:3
+    grid = grids(i,:)
+    N_theta = grid(1)
+    d_theta = 1 / (N_theta + 1)
+    N_eta = grid(2)
+    d_eta = 1 / N_eta
+    d_tau = CFL * d_eta * d_theta
+
+    cur = init_positions1()
+    prev = cur
+
+    for t = 1:N_tau
+      nxt = next_positions(cur, prev)
+      ex = get_positions_ex(t)
+
+      errs(t) = max(abs(nxt - ex))
+
+      prev = cur
+      cur = nxt
+    end
+
+    xtitle('', 'Temps', 'Erreur relative globale')
+    plot2d(1:N_tau, errs, i)
+  end
+
+  legend(['(80, 40)';'(40, 20)';'(160, 80)'])
+  xs2png(0, 'q19relerror')
+endfunction
+
 // -------
 // Question 20
 // -------
