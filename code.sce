@@ -54,25 +54,36 @@ function nxt = next_positions(cur, prev)
   end
 endfunction
 
-function plot_positions(z)
+function plot_positions(z, plot_title)
   eta = linspace(0, 1, N_eta)
-  theta = linspace(0, 1, N_theta + 1)
-  plot3d1(eta, theta, z, flag=[2,0,4])
+  theta = linspace(0, 2 * %pi, N_theta + 1)
+  
+  x = zeros(N_eta, N_theta + 1)
+  y = zeros(N_eta, N_theta + 1)
+
+  for i = 1:N_eta
+    for j = 1:(N_theta + 1)
+      x(i, j) = eta(i) * cos(theta(j))
+      y(i, j) = eta(i) * sin(theta(j))
+    end
+  end
+  
+  ax = gca()
+  ax.data_bounds = [-1, -1, -1 ; 1, 1, 1]
+  xtitle(plot_title, 'x', 'y', 'w')
+  surf(x, y, z)
 endfunction
 
 function num_animation(init_positions)
   cur = init_positions()
   prev = cur // Conditions aux limites sur la derivee
-  plot_positions(cur)
+  plot_positions(cur, 'Numérique')
 
   for t = 1:N_tau
     drawlater;
     nxt = next_positions(cur, prev)
     clf();
-    ax = gca()
-    ax.data_bounds = [0, 0, -1 ; 1, 1, 1]
-    xtitle('Numérique', 'eta', 'theta', 'w')
-    plot_positions(nxt)
+    plot_positions(nxt, 'Numérique')
     drawnow;
     prev = cur
     cur = nxt
@@ -106,7 +117,6 @@ endfunction
 function q16_animation()
   cur = init_positions()
   prev = cur // Conditions aux limites sur la derivee
-  plot_positions(cur)
   
   N_tau = 100
   d_tau = 0.01
@@ -114,22 +124,15 @@ function q16_animation()
   d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
   N_eta = 40
   d_eta = 1 / N_eta
-  c = 1
 
   for t = 1:N_tau
     drawlater;
     nxt = next_positions(cur, prev)
     clf();
     subplot(1, 2, 1)
-    xtitle('Numérique', 'eta', 'theta', 'w')
-    ax = gca()
-    ax.data_bounds = [0, 0, -1 ; 1, 1, 1]
-    plot_positions(nxt)
+    plot_positions(nxt, 'Numérique')
     subplot(1, 2, 2)
-    xtitle('Exacte', 'eta', 'theta', 'w')
-    ax = gca()
-    ax.data_bounds = [0, 0, -1 ; 1, 1, 1]
-    plot_positions(get_positions_ex(t))
+    plot_positions(get_positions_ex(t), 'Exacte')
     drawnow;
     prev = cur
     cur = nxt
