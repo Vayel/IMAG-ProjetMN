@@ -1,3 +1,5 @@
+driver("Rec")
+
 lambda01 = 2.40483
 lambda11 = 3.83171
 lambda03 = 8.65373
@@ -10,7 +12,7 @@ function z = init_positions1()
   z = zeros(N_eta, N_theta + 1)
 
   for i = 1:N_eta
-    z(i,:) = z(i,:) + besselj(0, lambda03 * i * d_eta)
+    z(i,:) = besselj(0, lambda03 * i * d_eta)
   end
 endfunction
 
@@ -85,6 +87,8 @@ function num_animation(init_positions)
     clf();
     plot_positions(nxt, 'Numérique')
     drawnow;
+    im_name = 'image' + string(t) + '.gif'
+    xs2gif(0, im_name)
     prev = cur
     cur = nxt
   end
@@ -97,7 +101,6 @@ function q15_animation()
   d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
   N_eta = 40
   d_eta = 1 / N_eta
-  c = 1
 
   num_animation(init_positions1)
 endfunction
@@ -115,15 +118,15 @@ function z = get_positions_ex(n)
 endfunction
 
 function q16_animation()
-  cur = init_positions()
-  prev = cur // Conditions aux limites sur la derivee
-  
   N_tau = 100
   d_tau = 0.01
   N_theta = 80
   d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
   N_eta = 40
   d_eta = 1 / N_eta
+
+  cur = init_positions()
+  prev = cur // Conditions aux limites sur la derivee
 
   for t = 1:N_tau
     drawlater;
@@ -134,6 +137,8 @@ function q16_animation()
     subplot(1, 2, 2)
     plot_positions(get_positions_ex(t), 'Exacte')
     drawnow;
+    im_name = 'image' + string(t) + '.gif'
+    xs2gif(0, im_name)
     prev = cur
     cur = nxt
   end
@@ -215,8 +220,8 @@ function z = init_positions2()
   z = zeros(N_eta, N_theta + 1)
 
   for i = 1:N_eta
-    for j = 1:N_theta
-      z(i,:) = besselj(1, lambda11 * i * d_eta) * cos(j * d_theta) / 2
+    for j = 1:(N_theta + 1)
+      z(i, j) = besselj(1, lambda11 * i * d_eta) * cos(j * d_theta) / 2
     end
   end
 endfunction
@@ -228,7 +233,6 @@ function q20_animation()
   d_theta = 1 / (N_theta + 1) // La matrice est de taille N_eta * (N_theta + 1)
   N_eta = 40
   d_eta = 1 / N_eta
-  c = 1
 
   num_animation(init_positions2)
 endfunction
