@@ -446,19 +446,42 @@ On a un résultat analogue pour les dérivées par rapport à $\theta$ et $\tau$, do
 
 \section*{Question 11}
 
-En coordonnées cartésiennes, le schéma explicite est :
+En coordonnées cartésiennes, le laplacien est défini de partout, donc on peut
+exprimer le schéma explicite pour tout indice :
 
 $$
-\rho \frac{w_{k, l}^{m+1} - 2w_{k, l}^m + w_{k, l}^{m-1}}{dt^2} =
-T \times (\frac{w_{k+1, l}^m - 2w_{k, l}^m + w_{k-1, l}^m}{dx^2} + \frac{w_{k, l+1}^m - 2w_{k, l}^m + w_{k, l-1}^m}{dy^2})
+\rho \frac{W_{k, l}^{m+1} - 2W_{k, l}^m + W_{k, l}^{m-1}}{dt^2} =
+T \times (\frac{W_{k+1, l}^m - 2W_{k, l}^m + W_{k-1, l}^m}{dx^2} + \frac{W_{k, l+1}^m - 2W_{k, l}^m + W_{k, l-1}^m}{dy^2})
 $$
 
 On l'étudie en $(k, l) = (1, 1)$ pour avoir $\eta = 0$ :
 
 $$
-\rho \frac{w_{1, 1}^{m+1} - 2w_{1, 1}^m + w_{1, 1}^{m-1}}{dt^2} =
-T \times (\frac{w_{2, 1}^m - 2w_{1, 1}^m + w_{0, 1}^m}{dx^2} + \frac{w_{1, 2}^m - 2w_{1, 1}^m + w_{1, 0}^m}{dy^2})
+\rho \frac{W_{1, 1}^{m+1} - 2W_{1, 1}^m + W_{1, 1}^{m-1}}{dt^2} =
+T \times (\frac{W_{2, 1}^m - 2W_{1, 1}^m + W_{0, 1}^m}{dx^2} + \frac{W_{1, 2}^m - 2W_{1, 1}^m + W_{1, 0}^m}{dy^2})
 $$
+
+Pour $N_{\theta} = 8$, en prenant $dx = dy = dr = d\eta * a$, on a :
+
+$$
+\left\{\begin{aligned}
+W_{1, 1} &= w_{1, 1} \\
+W_{2, 1} &= w_{2, 1} \\
+W_{0, 1} &= w_{2, 5} \\
+W_{1, 2} &= w_{2, 3} \\
+W_{1, 0} &= w_{2, 7} \\
+\end{aligned}\right.
+$$
+
+Comme $d\tau^2 = \frac{c^2}{a^2}dt^2$, on en déduit la première équation.
+La deuxième se retrouve en considérant un repère cartésien $(O, x', y')$
+rotation de $45°$ du repère $(O, x, y)$.
+
+En sommant les deux équations, on obtient l'égalité de la condition limite en
+$\eta = 0$ pour $N_{\theta} = 8$.
+
+Ce résultat se généralise facilement pour $N_{\theta} = 4n$, puisqu'il suffit
+de considérer les repères cartésiens pivotés d'un angle $i * \frac{90}{n}$ degrés, $0 \leq i \leq n-1$.
 
 \section*{Question 12}
 
@@ -493,13 +516,13 @@ $$
 Comme la première équation est valable pour tout $\tau$, on obtient :
 
 $$
-\omega^2 F(\eta, \theta) + 
+\omega^2 F + 
 \frac{\partial^2 F}{\partial \eta^2} +
 \frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} +
 \frac{1}{\eta} \frac{\partial F}{\partial \theta} = 0
 $$
 
-Supposons que les $F_n$ définis dans l'énoncé vérifie l'équation suivante :
+Supposons que les $F_n$ définis dans l'énoncé vérifient l'équation suivante :
 
 $$
 \frac{1}{\omega^2} \frac{d^2F_n}{d\eta^2} + \frac{1}{\omega \eta} \frac{1}{\omega} \frac{dF_n}{d\eta} + F_n - \frac{n^2}{\omega^2 \eta^2} F_n = 0
@@ -509,6 +532,24 @@ $$
 
 $$
 \frac{d^2F_n}{d\eta^2} + \frac{1}{\eta} \frac{dF_n}{d\eta} + \omega^2 F_n - \frac{n^2}{\eta^2} F_n = 0
+$$
+
+Posons $G_n : (\eta, \theta) \mapsto F_n(\eta) cos(n\theta)$. Alors :
+
+$$
+\begin{aligned}
+  \omega^2 G_n(\eta, \theta) + 
+  \frac{\partial^2 G_n}{\partial \eta^2}(\eta, \theta) +
+  \frac{1}{\eta^2} \frac{\partial^2 G_n}{\partial \theta^2}(\eta, \theta) +
+  \frac{1}{\eta} \frac{\partial G_n}{\partial \theta}(\eta, \theta) 
+  &=
+  cos(n\theta) [\omega^2 F_n(\eta) +
+                \frac{\partial^2 F_n}{\partial \eta^2}(\eta) +
+                \frac{-n^2}{\eta^2} F_n(\eta)] \\
+  &+ \frac{-n}{\eta} F_n(\eta) sin(n\theta) \\
+  &=
+  \frac{-1}{\eta} [cos(n\theta) \frac{dF_n}{d\eta} + n F_n(\eta) sin(n\theta)] \\
+\end{aligned}
 $$
 
 \section*{Question 15}
