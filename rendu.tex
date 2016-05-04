@@ -9,6 +9,7 @@
 \usepackage{amsopn}
 \usepackage{fancyhdr}
 \usepackage{amsmath,amssymb}
+\usepackage{float}
 
 \newcommand{\noi}{\noindent}
 \newcommand{\dsp}{\displaystyle}
@@ -68,6 +69,19 @@ On obtient bien:
 \[
     U_n(x)=B_n\sin\left(n\pi \frac{x}{L}\right),\quad \omega_n=n\pi \frac{\gamma}{L}\Leftrightarrow f_n=n\frac{1}{2L}\sqrt{\frac{T}{\mu}}
 \]
+Par le principe de superpostion des ondes propres on a,
+\[
+    u(x,t)=\sum_{n=1}^{\infty}B_{n}sin(n\pi\frac{x}{L})cos(n\pi\frac{\gamma t}{L})
+\]
+Et par la condition aux limites:
+\[
+    u(x,t)=\sum_{n=1}^{\infty}B_{n}sin(n\pi\frac{x}{L})
+\]
+Avec Fourier on obtient que:
+\[
+    B_{n}=\frac{2}{L}\int_{0}^{L}u(x,t)sin(n\pi\frac{x}{L})dx
+\]
+
 Lorsque la longueur de la corde augmente, la fréquence fondamentale diminue. Lorsque la longueur est divisé par 2 on a $f_{n}=n\sqrt{\frac{T}{\mu}}$ et donc pour la fréquence fondamentale $f_{1}=\sqrt{\frac{T}{\mu}}$.
 Lorsque la masse linéique aumente, la fréquence fondamentale diminue et lorsque la tension augment la fréquence fondamentale augmente également.
 
@@ -430,9 +444,9 @@ lui appliquer un développement de Taylor :
 $$
 \left\{\begin{aligned}
   w(\eta_{i+1}, \theta_j, \tau_n) &= w(\eta_i + d\eta, \theta_j, \tau_n) \\
-                                  &= w(\eta_i, \theta_j, \tau_n) + d\eta \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \frac{d\eta^2}{2} \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2) \\
+                                  &= w(\eta_i, \theta_j, \tau_n) + d\eta \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \frac{d\eta^2}{2} \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + o(d\eta^2) \ (1) \\
   w(\eta_{i-1}, \theta_j, \tau_n) &= w(\eta_i - d\eta, \theta_j, \tau_n) \\
-                                  &= w(\eta_i, \theta_j, \tau_n) - d\eta \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \frac{d\eta^2}{2} \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2)
+                                  &= w(\eta_i, \theta_j, \tau_n) - d\eta \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \frac{d\eta^2}{2} \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + o(d\eta^2) \ (2)
 \end{aligned}\right.
 $$
 
@@ -440,8 +454,8 @@ Donc :
 
 $$
 \left\{\begin{aligned}
-    \frac{w(\eta_{i+1}, \theta_j, \tau_n) - w(\eta_{i-1}, \theta_j, \tau_n)}{2d\eta} &= \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2) \\
-    \frac{w(\eta_{i+1}, \theta_j, \tau_n) - w(\eta_i, \theta_j, \tau_n) + w(\eta_{i-1}, \theta_j, \tau_n)}{d\eta^2} &= \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + \mathcal{O}(h^2)
+    \frac{w(\eta_{i+1}, \theta_j, \tau_n) - w(\eta_{i-1}, \theta_j, \tau_n)}{2d\eta} &= \frac{\partial w}{\partial \eta}(\eta_i, \theta_j, \tau_n) + o(d\eta) \ (1) - (2) \\
+    \frac{w(\eta_{i+1}, \theta_j, \tau_n) - 2w(\eta_i, \theta_j, \tau_n) + w(\eta_{i-1}, \theta_j, \tau_n)}{d\eta^2} &= \frac{\partial^2 w}{\partial \eta^2}(\eta_i, \theta_j, \tau_n) + o(1) \ (1) + (2)
 \end{aligned}\right.
 $$
 
@@ -463,19 +477,42 @@ On a un résultat analogue pour les dérivées par rapport à $\theta$ et $\tau$, do
 
 \section*{Question 11}
 
-En coordonnées cartésiennes, le schéma explicite est :
+En coordonnées cartésiennes, le laplacien est défini de partout, donc on peut
+exprimer le schéma explicite pour tout indice :
 
 $$
-\rho \frac{w_{k, l}^{m+1} - 2w_{k, l}^m + w_{k, l}^{m-1}}{dt^2} =
-T \times (\frac{w_{k+1, l}^m - 2w_{k, l}^m + w_{k-1, l}^m}{dx^2} + \frac{w_{k, l+1}^m - 2w_{k, l}^m + w_{k, l-1}^m}{dy^2})
+\rho \frac{W_{k, l}^{m+1} - 2W_{k, l}^m + W_{k, l}^{m-1}}{dt^2} =
+T \times (\frac{W_{k+1, l}^m - 2W_{k, l}^m + W_{k-1, l}^m}{dx^2} + \frac{W_{k, l+1}^m - 2W_{k, l}^m + W_{k, l-1}^m}{dy^2})
 $$
 
 On l'étudie en $(k, l) = (1, 1)$ pour avoir $\eta = 0$ :
 
 $$
-\rho \frac{w_{1, 1}^{m+1} - 2w_{1, 1}^m + w_{1, 1}^{m-1}}{dt^2} =
-T \times (\frac{w_{2, 1}^m - 2w_{1, 1}^m + w_{0, 1}^m}{dx^2} + \frac{w_{1, 2}^m - 2w_{1, 1}^m + w_{1, 0}^m}{dy^2})
+\rho \frac{W_{1, 1}^{m+1} - 2W_{1, 1}^m + W_{1, 1}^{m-1}}{dt^2} =
+T \times (\frac{W_{2, 1}^m - 2W_{1, 1}^m + W_{0, 1}^m}{dx^2} + \frac{W_{1, 2}^m - 2W_{1, 1}^m + W_{1, 0}^m}{dy^2})
 $$
+
+Pour $N_{\theta} = 8$, en prenant $dx = dy = dr = d\eta * a$, on a :
+
+$$
+\left\{\begin{aligned}
+W_{1, 1} &= w_{1, 1} \\
+W_{2, 1} &= w_{2, 1} \\
+W_{0, 1} &= w_{2, 5} \\
+W_{1, 2} &= w_{2, 3} \\
+W_{1, 0} &= w_{2, 7} \\
+\end{aligned}\right.
+$$
+
+Comme $d\tau^2 = \frac{c^2}{a^2}dt^2$, on en déduit la première équation.
+La deuxième se retrouve en considérant un repère cartésien $(O, x', y')$
+rotation de $45°$ du repère $(O, x, y)$.
+
+En sommant les deux équations, on obtient l'égalité de la condition limite en
+$\eta = 0$ pour $N_{\theta} = 8$.
+
+Ce résultat se généralise facilement pour $N_{\theta} = 4n$, puisqu'il suffit
+de considérer les repères cartésiens pivotés d'un angle $i * \frac{90}{n}$ degrés, $0 \leq i \leq n-1$.
 
 \section*{Question 12}
 
@@ -483,7 +520,31 @@ $$
 
 \section*{Question 13}
 
+Avec un développement de Taylor à l'ordre 4, on obtient :
 
+$$
+\begin{aligned}
+    w_{i, j}^{n+1} + w_{i, j}^{n-1} &= 2w_{i, j}^n + d\tau^2 \frac{\partial^2 w}{\partial \tau^2}(\eta_i, \theta_j, \tau_n)
+                                                                    + \frac{d\tau^4}{12} \frac{\partial^4 w}{\partial \tau^4}(\eta_i, \theta_j, \tau_n) + o(d\tau^4)
+\end{aligned}
+$$
+
+Donc :
+
+$$
+\begin{aligned}
+    \frac{w_{i, j}^{n+1} - 2w_{i, j}^n + w_{i, j}^{n-1}}{d\tau^2} &= \frac{\partial^2 w}{\partial \tau^2}(\eta_i, \theta_j, \tau_n)
+                                                                     + \frac{d\tau^2}{12} \frac{\partial^4 w}{\partial \tau^4}(\eta_i, \theta_j, \tau_n) + o(d\tau^2)
+\end{aligned}
+$$
+
+Or $\frac{\partial^4 w}{\partial \tau^4}$ est continue donc bornée sur un compact borné. Donc $\frac{\partial^4 w}{\partial \tau^4} = \mathcal{O}(d\tau^2)$
+
+Donc le schéma est d'ordre 2 en temps.
+
+De plus, on obtient le même résultat pour les dérivées secondes en espace.
+Pour la dérivée première en $\eta$, on développe jusqu'à l'ordre 3, ce qui donne un ordre 2
+une fois qu'on divise par $d\eta$.
 
 \section*{Question 14}
 
@@ -507,27 +568,58 @@ On obtient bien l'équation de Bessel suivante:
 \[
     \sum_{n}\frac{d^2F_{n}}{d\alpha^2}+\frac{1}{\omega\eta}\frac{dF_{n}}{d\alpha}+(1-\frac{n^2}{\alpha^2})F_{n}=0
 \]
-
 \section*{Question 15}
+
+Se référer au fichier \verb+animation15.gif+.
 
 \section*{Question 16}
 
+L'animation de la solution exacte est dans le fichier \verb+animation16.gif+.
 
+Les erreurs relatives ont été calculées selon la formule :
+
+$$
+\frac{w_{num} - w_{ex}}{|w_{ex}|}
+$$
+
+\begin{figure}[H]
+  \includegraphics[scale=0.25]{q16relerror.png}
+\end{figure}
+
+L'erreur relative décroit avec le CFL, ce qui coïncide avec le fait que le schéma
+est consistant en temps.
 
 \section*{Question 17}
 
+\begin{figure}[H]
+  \includegraphics[scale=0.25]{q17relerror.png}
+\end{figure}
 
+La valeur du CFL n'influe pas sur l'erreur relative, laquelle augmente : le
+schéma n'est pas stable.
 
 \section*{Question 18}
 
+Dans la question 16, l'erreur dépendait uniquement de $\eta$ et $\tau$ et elle
+décroissait avec le CFL. En 17, où on introduit un terme en $\theta$, on remarque
+que l'erreur ne diminue pas.
 
+On en déduit que l'instabilité provient du terme en $\theta$, même si le changement
+de formule peut également avoir une influence.
 
 \section*{Question 19}
 
+\begin{figure}[H]
+  \includegraphics[scale=0.4]{q19_relerror.pdf}
+\end{figure}
 
+On lit sur le schéma que lorsque $N_{\theta}$ et $N_{\eta}$ sont multipliés par deux,
+l'erreur l'est par quatre. Quand ils sont multipliés par quatre, l'erreur l'est par seize.
+
+Il aurait été judicieux de tracer le rapport des erreurs relatives pour deux grilles.
 
 \section*{Question 20}
 
-
+La simulation donne des résultats étranges, différents de l'animation fournie.
 
 \end{document}

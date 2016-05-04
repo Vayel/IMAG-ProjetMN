@@ -125,7 +125,7 @@ function q16_animation()
   N_eta = 40
   d_eta = 1 / N_eta
 
-  cur = init_positions()
+  cur = init_positions1()
   prev = cur // Conditions aux limites sur la derivee
 
   for t = 1:N_tau
@@ -144,7 +144,7 @@ function q16_animation()
   end
 endfunction
 
-function relerror(f)
+function relerror(ex_positions, init_positions, ttl)
   CFL_start = 0.2
   CFL_step = 0.2
 
@@ -161,13 +161,13 @@ function relerror(f)
       cur = nxt
 
       num = nxt(1, 1)
-      ex = f(t)
+      ex = ex_positions(t)
       ex = ex(1, 1)
 
       err(1, t) = (num - ex)/abs(ex)
     end
 
-    subplot(1, 5, CFL / CFL_step)
+    subplot(2, 3, CFL / CFL_step)
     xtitle('CFL = ' + string(CFL), 'Temps', 'Erreur relative')
     plot2d(1:N_tau, err)
   end
@@ -180,7 +180,7 @@ function q16_relerror()
   N_eta = 40
   d_eta = 1 / N_eta
 
-  relerror(get_positions_ex)
+  relerror(get_positions_ex, init_positions1, 'q16relerror')
 endfunction
 
 // -------
@@ -198,6 +198,16 @@ function z = get_positions_ex2(n)
   end
 endfunction
 
+function z = init_positions2()
+  z = zeros(N_eta, N_theta + 1)
+
+  for i = 1:N_eta
+    for j = 1:(N_theta + 1)
+      z(i, j) = besselj(0, lambda01 * i * d_eta) * besselj(1, lambda11 * i * d_eta) * cos(j * d_theta)
+    end
+  end
+endfunction
+
 function q17_relerror()
   N_tau = 100
   N_theta = 80
@@ -205,18 +215,54 @@ function q17_relerror()
   N_eta = 40
   d_eta = 1 / N_eta
 
-  relerror(get_positions_ex2)
+  relerror(get_positions_ex2, init_positions2, 'q17relerror')
 endfunction
 
 // -------
 // Question 19
 // -------
 
+function q19_relerror()
+  CFL = 0.8
+  N_tau = 100
+  grids = [80, 40 ; 40, 20 ; 160, 80]
+
+  errs = zeros(1, N_tau)
+
+  for i = 1:3
+    grid = grids(i,:)
+    N_theta = grid(1)
+    d_theta = 1 / (N_theta + 1)
+    N_eta = grid(2)
+    d_eta = 1 / N_eta
+    d_tau = CFL * d_eta * d_theta
+
+    cur = init_positions1()
+    prev = cur
+
+    for t = 1:N_tau
+      nxt = next_positions(cur, prev)
+      ex = get_positions_ex(t)
+
+      errs(t) = max(abs(nxt - ex))
+
+      prev = cur
+      cur = nxt
+    end
+
+    xtitle('', 'Temps', 'Erreur relative globale')
+    plot2d(1:N_tau, errs, i)
+  end
+
+  legend(['(80, 40)';'(40, 20)';'(160, 80)'])
+  xs2pdf(0, 'q19_relerror')
+endfunction
+
 // -------
 // Question 20
 // -------
 
-function z = init_positions2()
+function z = init_positions3()
   z = zeros(N_eta, N_theta + 1)
 
   for i = 1:N_eta
@@ -234,5 +280,5 @@ function q20_animation()
   N_eta = 40
   d_eta = 1 / N_eta
 
-  num_animation(init_positions2)
+  num_animation(init_positions3)
 endfunction
