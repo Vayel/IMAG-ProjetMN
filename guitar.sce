@@ -1,4 +1,6 @@
 
+//init(44100,0.001,110,4,0.1,1,[0.3 0.7],[100,10;1000,8])
+
 function init(SR,B,f,TF,x0,c0,rp,loss)
     mu=1;
     N=50;
@@ -100,7 +102,7 @@ function SolveG(mata,matb,matc,x0,c0,N,rp,SR)
 endfunction
 
 function Solve(mata,matb,matc,x0,c0,N,rp,SR)
-    NF=10000;
+    NF=100000;
     u_nm1=zeros(N-1,1);
     h=1/N;
     x=h;i=1;
@@ -149,7 +151,7 @@ function Solve(mata,matb,matc,x0,c0,N,rp,SR)
     end
     plot(1:NF,out);
     playsnd(out,SR);
-    disp(fft(out(:,1)));
+    plot(fftshift(fft(out(1,:))));
 endfunction
 
 function y=Gauss(A,b)

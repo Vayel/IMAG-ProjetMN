@@ -353,10 +353,27 @@ $\beta^2$ admet donc deux racines réelles, on ne considère que la racine positiv
  Ce qui nous donne finalement,
  \[
     \sigma_0=\frac{6 \ln 10}{\xi(\omega_2)-\xi(\omega_1)}\left(\frac{\xi(\omega_2)}{T_{60}(\omega_1)}-\frac{\xi(\omega_1)}{T_{60}(\omega_2)}\right),
- \]
+\]
 
+\section*{Question 6}
+\begin{figure}
+    \includegraphics[width=15cm]{vecteur_son_100000.png}
+    \caption{Vecteur son pour 100000 iterations}
+    \includegraphics[width=15cm]{vecteur_son_2000.jpg}
+    \caption{Vecteur son pour 2000 itérations}
+\end{figure}
+
+\newpage
 \section*{Question 7}
 
+\large{Quantitativement}\\
+\begin{figure}[!h]
+    \includegraphics[width=15cm]{guitar_spectre.jpg}
+    \caption{Spectre du vecteur out}
+\end{figure}\\
+\large{Qualitativement}\\\\
+On voit que plus le paramètre d'inharmonicité est faible plus la timbre de la note est basse. Symétriquement, plus la valeur de B est élevée plus la timbre de la note est haute.\\
+La position x0 ne semble pas vraiment impacter le timbre.\\
 
 
 \section*{Question 8}
@@ -470,50 +487,28 @@ $$
 
 \section*{Question 14}
 
-$$
-\begin{aligned}
-(10) &\Leftrightarrow \left\{\begin{aligned}
-       &-\omega^2 F(\eta, \theta) cos(\omega \tau) = \frac{\partial^2 F}{\partial \eta^2} cos(\omega \tau) +
-                                                     \frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} cos(\omega \tau) +
-                                                     \frac{1}{\eta} \frac{\partial F}{\partial \theta} cos(\omega \tau) \\
-       &F(1, \theta) cos(\omega \tau) = 0 \\
-       &F(\eta, \theta) = w_0(\eta cos(\theta), \eta sin(\theta)) \\
-     \end{aligned}\right. \\
-     &\Leftrightarrow \left\{\begin{aligned}
-       &cos(\omega \tau) [\omega^2 F(\eta, \theta) + 
-       \frac{\partial^2 F}{\partial \eta^2} +
-       \frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} +
-       \frac{1}{\eta} \frac{\partial F}{\partial \theta}] = 0 \\
-       &F(1, \theta) cos(\omega \tau) = 0 \\
-       &F(\eta, \theta) = w_0(\eta cox(\theta), \eta sin(\theta)) \\
-     \end{aligned}\right.
-\end{aligned}
-$$
-
-Comme la première équation est valable pour tout $\tau$, on obtient :
-
-$$
-\omega^2 F(\eta, \theta) + 
-\frac{\partial^2 F}{\partial \eta^2} +
-\frac{1}{\eta^2} \frac{\partial^2 F}{\partial \theta^2} +
-\frac{1}{\eta} \frac{\partial F}{\partial \theta} = 0
-$$
-
-Supposons que les $F_n$ définis dans l'énoncé vérifie l'équation suivante :
-
-$$
-\frac{1}{\omega^2} \frac{d^2F_n}{d\eta^2} + \frac{1}{\omega \eta} \frac{1}{\omega} \frac{dF_n}{d\eta} + F_n - \frac{n^2}{\omega^2 \eta^2} F_n = 0
-$$
-
-\textit{i.e.}
-
-$$
-\frac{d^2F_n}{d\eta^2} + \frac{1}{\eta} \frac{dF_n}{d\eta} + \omega^2 F_n - \frac{n^2}{\eta^2} F_n = 0
-$$
+On a donc $\omega(\eta,\theta,\tau)=F(\eta,\theta)cos(\omega\tau)$. On commence par remplacer  $\omega(\eta,\theta,\tau)$ dans l'EDP.
+\[
+    -F(\eta,\theta)\omega^2cos(\omega\tau)=\frac{\partial^2F(\eta,\theta)}{\partial \eta^2}cos(\omega\tau)+\frac{1}{\eta^2}\frac{\partial^2F(\eta,\theta)}{\partial \theta^2}cos(\omega\tau)+\frac{1}{\eta}\frac{\partial F(\eta,\theta)}{\partial\eta}cos(\omega\tau)
+\]
+En simplifiant on a:
+\[
+    -\omega^2F(\eta,\theta)=\frac{\partial^2F(\eta,\theta)}{\partial \eta^2}+\frac{1}{\eta^2}\frac{\partial^2F(\eta,\theta)}{\partial \theta^2}+\frac{1}{\eta}\frac{\partial F(\eta,\theta)}{\partial\eta}
+\]
+On injecte alors dans l'équation $F(\eta,\theta)=\sum_{n}F_{n}(\eta)cos(n\theta)$ et on divise par $cos(n\theta)$
+\[
+    -\omega^2\sum_{n}F_{n}(\eta)=\sum_{n}\frac{d^2F_{n}(\eta)}{d\eta^2}-\frac{n^2}{\eta^2}\sum_{n}F_{n}(\eta)+\frac{1}{\eta}\frac{dF_{n}(\eta)}{d\eta}
+\]
+En divisant par $\omega^2$ on obtient,
+\[
+    \sum_{n}F_{n}(\eta)\frac{d^2F_{n}(\eta)}{d\eta^2\omega^2}-\frac{n^2}{\omega^2\eta^2}F_{n}(\eta)+\frac{1}{\omega\eta}\frac{dF_{n}(\eta)}{d\eta\omega}=0
+\]
+On obtient bien l'équation de Bessel suivante:
+\[
+    \sum_{n}\frac{d^2F_{n}}{d\alpha^2}+\frac{1}{\omega\eta}\frac{dF_{n}}{d\alpha}+(1-\frac{n^2}{\alpha^2})F_{n}=0
+\]
 
 \section*{Question 15}
-
-
 
 \section*{Question 16}
 
