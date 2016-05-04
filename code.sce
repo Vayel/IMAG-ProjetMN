@@ -144,7 +144,7 @@ function q16_animation()
   end
 endfunction
 
-function relerror(ex_positions, init_positions)
+function relerror(ex_positions, init_positions, ttl)
   CFL_start = 0.2
   CFL_step = 0.2
 
@@ -167,7 +167,7 @@ function relerror(ex_positions, init_positions)
       err(1, t) = (num - ex)/abs(ex)
     end
 
-    subplot(1, 5, CFL / CFL_step)
+    subplot(2, 3, CFL / CFL_step)
     xtitle('CFL = ' + string(CFL), 'Temps', 'Erreur relative')
     plot2d(1:N_tau, err)
   end
@@ -180,8 +180,7 @@ function q16_relerror()
   N_eta = 40
   d_eta = 1 / N_eta
 
-  relerror(get_positions_ex, init_positions1)
-  xs2png(0, 'q16relerror')
+  relerror(get_positions_ex, init_positions1, 'q16relerror')
 endfunction
 
 // -------
@@ -216,8 +215,7 @@ function q17_relerror()
   N_eta = 40
   d_eta = 1 / N_eta
 
-  relerror(get_positions_ex2, init_positions2)
-  xs2png(0, 'q17relerror')
+  relerror(get_positions_ex2, init_positions2, 'q17relerror')
 endfunction
 
 // -------
@@ -257,7 +255,7 @@ function q19_relerror()
   end
 
   legend(['(80, 40)';'(40, 20)';'(160, 80)'])
-  xs2png(0, 'q19relerror')
+  xs2pdf(0, 'q19_relerror')
 endfunction
 
 // -------

@@ -9,6 +9,7 @@
 \usepackage{amsopn}
 \usepackage{fancyhdr}
 \usepackage{amsmath,amssymb}
+\usepackage{float}
 
 \newcommand{\noi}{\noindent}
 \newcommand{\dsp}{\displaystyle}
@@ -578,26 +579,56 @@ $$
 
 \section*{Question 15}
 
-
+Se référer au fichier \verb+animation15.gif+.
 
 \section*{Question 16}
 
+L'animation de la solution exacte est dans le fichier \verb+animation16.gif+.
 
+Les erreurs relatives ont été calculées selon la formule :
+
+$$
+\frac{w_{num} - w_{ex}}{|w_{ex}|}
+$$
+
+\begin{figure}[H]
+  \includegraphics[scale=0.25]{q16relerror.png}
+\end{figure}
+
+L'erreur relative décroit avec le CFL, ce qui coïncide avec le fait que le schéma
+est consistant en temps.
 
 \section*{Question 17}
 
+\begin{figure}[H]
+  \includegraphics[scale=0.25]{q17relerror.png}
+\end{figure}
 
+La valeur du CFL n'influe pas sur l'erreur relative, laquelle augmente : le
+schéma n'est pas stable.
 
 \section*{Question 18}
 
+Dans la question 16, l'erreur dépendait uniquement de $\eta$ et $\tau$ et elle
+décroissait avec le CFL. En 17, où on introduit un terme en $\theta$, on remarque
+que l'erreur ne diminue pas.
 
+On en déduit que l'instabilité provient du terme en $\theta$, même si le changement
+de formule peut également avoir une influence.
 
 \section*{Question 19}
 
+\begin{figure}[H]
+  \includegraphics[scale=0.4]{q19_relerror.pdf}
+\end{figure}
 
+On lit sur le schéma que lorsque $N_{\theta}$ et $N_{\eta}$ sont multipliés par deux,
+l'erreur l'est par quatre. Quand ils sont multipliés par quatre, l'erreur l'est par seize.
+
+Il aurait été judicieux de tracer le rapport des erreurs relatives pour deux grilles.
 
 \section*{Question 20}
 
-
+La simulation donne des résultats étranges, différents de l'animation fournie.
 
 \end{document}
